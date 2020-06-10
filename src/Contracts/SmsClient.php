@@ -27,6 +27,13 @@ interface SmsClient
      */
     public function send($number, $message, array $options = []);
 
+    /**
+     * @param int $groupId
+     * @param string $message
+     * @param array $options
+     *
+     * @return array
+     */
     public function sendGroup($groupId, $message, array $options = []);
 
     /**
@@ -36,5 +43,10 @@ interface SmsClient
      */
     public function cost($number);
 
+    /**
+     * @param int $groupId
+     *
+     * @return int
+     */
     public function groupCost($groupId);
 }
