@@ -130,7 +130,7 @@ class SmsClient implements Contract
 
         // filter options
         $allowed = [
-            'clientref', 'data', 'dcs', 'multipart', 'rdelay', 'repeats ', 'sendid', 'srcaddr', 'subs', 'templates'
+            'clientref', 'data', 'dcs', 'multipart', 'rdelay', 'repeats', 'sendid', 'srcaddr', 'subs', 'templates'
         ];
         $query += array_intersect_key($options, array_flip((array) $allowed));
 

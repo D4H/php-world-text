@@ -3,9 +3,12 @@
 namespace WorldText\Traits;
 
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use WorldText\Exception;
 use function GuzzleHttp\Psr7\parse_query;
 
@@ -32,17 +35,23 @@ trait CanCreateHandlerStack
 
         // Add user agent header
         $stack->push(Middleware::mapRequest(function (RequestInterface $request) use ($accountId, $apiKey) {
-            return $request->withAddedHeader('User-Agent', 'world-text-php/' . self::VERSION);
-        }), 'world_text_auth');
+            return $request->withHeader('User-Agent', 'world-text-php/' . self::VERSION);
+        }), 'world_text_user_agent');
 
         // Enhance client exceptions to have accessors to the error data from world text
-        $stack->push(function (callable $next) {
+        $stack->before('http_errors', function (callable $next) {
             return function (RequestInterface $request, array $options) use ($next) {
-                try {
-                    return $next($request, $options);
-                } catch (ClientException $exception) {
-                    throw Exception::createFromParent($exception);
-                }
+                /** @var Promise $promise */
+                $promise = $next($request, $options);
+                return $promise->then(function (ResponseInterface $response) {
+                    return $response;
+                }, function (GuzzleException $exception) {
+                    if ($exception instanceof ClientException) {
+                        throw Exception::createFromParent($exception);
+                    }
+
+                    throw $exception;
+                });
             };
         }, 'exception_wrapping');
 
