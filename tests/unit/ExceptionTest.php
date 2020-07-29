@@ -1,11 +1,10 @@
 <?php
 
-namespace unit;
+namespace WorldText\Unit;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use WorldText\Exception;
 

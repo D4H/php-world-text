@@ -23,6 +23,11 @@
             "WorldText\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "WorldText\\Unit\\": "tests/unit/"
+        }
+    },
     "config": {
         "sort-packages": true
     },
