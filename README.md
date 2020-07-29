@@ -1,5 +1,9 @@
 # World-Text SDK for PHP
 
+[![Build Status](https://img.shields.io/travis/d4h/php-world-text.svg?style=flat-square)](https://travis-ci.org/d4h/php-world-text)
+[![Latest Stable Version](https://img.shields.io/packagist/v/d4h/world-text.svg?style=flat-square)](https://packagist.org/packages/d4h/world-text)
+[![License](https://img.shields.io/github/license/d4h/php-world-text?style=flat-square)](#license)
+
 PHP SDK for World Text SMS Text Messaging
 
 ## Installation
