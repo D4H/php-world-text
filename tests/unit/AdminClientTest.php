@@ -50,8 +50,8 @@ class AdminClientTest extends TestCase
         $stack = $this->client->getHandlerStack();
         $handler = new MockHandler([
             new Response(200, ['Content-Type' => 'application/json'], '{}'),
-            new Response(401, ['Content-Type' => 'application/json'], '{}'),
-            new Response(400, ['Content-Type' => 'application/json'], '{}'),
+            new Response(401, ['Content-Type' => 'application/json'], '{"desc": "foo", "error": "foo"}'),
+            new Response(400, ['Content-Type' => 'application/json'], '{"desc": "foo", "error": "foo"}'),
         ]);
         $stack->setHandler($handler);
 

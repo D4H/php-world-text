@@ -29,7 +29,7 @@ class TraitsTest extends TestCase
         // Arrange
         $stack = $this->client->getHandlerStack();
         $handler = new MockHandler([
-            new Response(400),
+            new Response(400, ['Content-Type' => 'application/json'], '{"desc": "foo", "error": "foo"}'),
         ]);
         $stack->setHandler($handler);
 
